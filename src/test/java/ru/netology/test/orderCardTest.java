@@ -27,8 +27,6 @@ public class orderCardTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
-//        options.addArguments("disable-extensions");
-//        options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
     }
 
@@ -47,7 +45,8 @@ public class orderCardTest {
         driver.findElement(By.className("button_theme_alfa-on-white")).click();
         String text = driver.findElement(By.className("paragraph")).getText();
 
-        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
+        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",
+                text.trim());
     }
 
 }

@@ -24,6 +24,4 @@ dependencies {
 
 test {
     useJUnitPlatform()
-//    systemProperty 'selenium.headless', System.getProperty('selenium.headless')
-//    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
 }
