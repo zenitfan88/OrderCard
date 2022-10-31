@@ -29,21 +29,19 @@ public class orderCardTest {
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
     }
-
     @AfterEach
     void tearDown() {
         driver.quit();
         driver = null;
     }
-
     @Test
-    void test() {
+    void formResponseTest() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван");
         driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+79278228262");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button_theme_alfa-on-white")).click();
-        String text = driver.findElement(By.className("paragraph")).getText();
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.className("button__content")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText();
 
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",
                 text.trim());
