@@ -36,79 +36,79 @@ public class orderCardTest {
         driver = null;
     }
 
-    @Test
-    void test() {
-        driver.get("http://localhost:9999");
-        driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван");
-        driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+79278228262");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button_theme_alfa-on-white")).click();
-        String text = driver.findElement(By.className("paragraph")).getText();
+@Test
+        void test () {
+    driver.get("http://localhost:9999");
+    driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван");
+    driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+79278228262");
+    driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+    driver.findElement(By.className("button__content")).click();
+    String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
 
-        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",
-                text.trim());
-    }
+    assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.",
+            text);
+}
+
 
     @Test
-    void testName() {
+    void incorrectNameTest() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("+79278228262");
         driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+79278228262");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button_theme_alfa-on-white")).click();
-        String text = driver.findElement(By.className("input__sub")).getText();
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.className("button__content")).click();
+        String text = driver.findElement(By.className("input__sub")).getText().trim();
 
         assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.",
-                text.trim());
+                text);
     }
 
     @Test
-    void testPhone() {
+    void incorrectPhoneTest() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван");
         driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+7927822826");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button_theme_alfa-on-white")).click();
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.className("button__content")).click();
         String text = driver.findElement(By.xpath("//span[text()='Мобильный телефон']/following-sibling:" +
-                ":span[contains(@class, 'input__sub')]")).getText();
+                ":span[contains(@class, 'input__sub')]")).getText().trim();
 
-        assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.",
-                text.trim());
+        assertEquals("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678.", text);
     }
 
     @Test
-    void testNameNull() {
+    void nullNameTest () {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("");
         driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+7927822826");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button_theme_alfa-on-white")).click();
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.className("button__content")).click();
         String text = driver.findElement(By.xpath("//span[text()='Фамилия и имя']/following-sibling:" +
-                ":span[contains(@class, 'input__sub')]")).getText();
-        assertEquals("Поле обязательно для заполнения",
-                text.trim());
+                ":span[contains(@class, 'input__sub')]")).getText().trim();
+
+        assertEquals("Поле обязательно для заполнения", text);
     }
 
     @Test
-    void testPhoneNull() {
+    void nullPhoneTest() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван");
         driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button_theme_alfa-on-white")).click();
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.className("button__content")).click();
         String text = driver.findElement(By.xpath("//span[text()='Мобильный телефон']/following-sibling" +
-                "::span[contains(@class, 'input__sub')]")).getText();
-        assertEquals("Поле обязательно для заполнения",
-                text.trim());
+                "::span[contains(@class, 'input__sub')]")).getText().trim();
+
+        assertEquals("Поле обязательно для заполнения", text);
     }
 
     @Test
-    void testCheckbox() {
+    void absentCheckboxTest() {
         driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван");
         driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+79278228262");
-        driver.findElement(By.className("button_theme_alfa-on-white")).click();
+        driver.findElement(By.className("button__content")).click();
         String text = driver.findElement(By.className("checkbox__text")).getCssValue("color");
-        assertEquals("rgba(255, 92, 92, 1)", text.trim());
+        assertEquals("rgba(255, 92, 92, 1)", text);
     }
 }
