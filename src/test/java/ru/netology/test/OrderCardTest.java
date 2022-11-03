@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class orderCardTest {
+public class OrderCardTest {
     WebDriver driver;
 
     @BeforeAll
@@ -37,7 +37,7 @@ public class orderCardTest {
     @Test
     void formResponseTest() {
         driver.get("http://localhost:9999");
-        driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван");
+        driver.findElement(By.cssSelector("span[data-test-id='name'] input")).sendKeys("Иван Иванов-Петров");
         driver.findElement(By.cssSelector("span[data-test-id='phone'] input")).sendKeys("+79278228262");
         driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.className("button__content")).click();
